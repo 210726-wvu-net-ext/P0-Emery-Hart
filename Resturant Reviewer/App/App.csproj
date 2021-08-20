@@ -10,6 +10,9 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <PackageReference Include="SeriLog" Version="2.10.0" />
+    <PackageReference Include="SeriLog.sinks.console" Version="4.0.0" />
+    <PackageReference Include="SeriLog.sinks.file" Version="5.0.0" />
   </ItemGroup>
 
   <PropertyGroup>

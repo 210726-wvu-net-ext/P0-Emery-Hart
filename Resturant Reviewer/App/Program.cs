@@ -13,13 +13,13 @@ var config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .Build();
 
-string connectionStr = configuration.GetConnectionString("projDB");
+string connectionStr = config.GetConnectionString("projDB");
 
-DbContextOptions<PojectzeroContext> option = new DbContextOptions<PojectzeroContext>()
+DbContextOptions<PojectzeroContext> option = new DbContextOptionsBuilder<PojectzeroContext>()
     .UseSqlServer(connectionStr)
     .Options;
 
-var context = new PojectzeroContext(options);    
+var context = new PojectzeroContext(option);    
 namespace App
 {
     class Program
