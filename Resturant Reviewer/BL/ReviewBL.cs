@@ -59,11 +59,12 @@ namespace BL
         /// </summary>
         /// <param name="rest">The resturaunt to find the average score for</param>
         /// <returns>The average score for the resturant</returns>
+
         public double AverageReviews(Models.Resturant rest)
         {
             double avg = 0;
             List<Models.Review> reviews = new List<Review>(GetReviews(rest.Id));
-
+        
             foreach (Models.Review rev in reviews)
             {
                 avg += rev.Rating;
@@ -73,7 +74,6 @@ namespace BL
 
             return avg;
         }
-
 
 
     }

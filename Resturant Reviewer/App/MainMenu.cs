@@ -17,6 +17,16 @@ namespace App
         //establish and store user or just prompt for admin when needed?
 
         //Logging here
+        private IReviewBL _reviewbl;
+        public  MainMenu(IReviewBL bl)
+        {
+            _reviewbl = bl;
+            Log.Logger=new LoggerConfiguration()
+                            .MinimumLevel.Debug()
+                            .WriteTo.File("../logs/logs.txt", rollingInterval:RollingInterval.Day)
+                            .CreateLogger();
+            Log.Information("UI Starting");
+        }
         public void Start()
         {
             bool done = false;
@@ -68,13 +78,55 @@ namespace App
             }while(!done);
         }
 
+        public void GetDetails(Resturant rest)
+        {
+            double avg = _reviewbl.AverageReviews(rest);
+            //Needs functionality to translate the SID to its actual string
+            Console.WriteLine($"Resturant#{rest.Id} -- {rest.Name}");
+            Console.WriteLine($"Zip Code - {rest.Zip}");
+            Console.WriteLine($"Style - {rest.Style}");
+            Console.WriteLine($"Average User Rating - {avg}");
+            Console.WriteLine($"Desc - {rest.Desc}");
+            Console.WriteLine("----------------------------------------------------------------------");
+        }
         private void GetResturants()
         {
+            List<Resturant> resturants = _reviewbl.GetAllResturants();
+            foreach(Resturant rest in resturants)
+            {
+                GetDetails(rest);
+            }
 
         }
 
         private void SingleSearch()
         {
+            Resturant foundRest;
+            string input;
+            int goodIn;
+            Console.WriteLine("Enter either the Name or ID# you wish to search for: ");
+            input = Console.ReadLine();
+
+            if (int.TryParse(input, out goodIn))
+            {
+                foundRest = _reviewbl.SearchResturants(goodIn);
+                Console.WriteLine("**Search Results**");
+                Console.WriteLine("----------------------------------------------------------------------");
+                GetDetails(foundRest);
+            }
+            else if (input != null)
+            {
+                foundRest = _reviewbl.SearchResturants(input);
+                Console.WriteLine("**Search Results**");
+                Console.WriteLine("----------------------------------------------------------------------");
+                GetDetails(foundRest);
+            }
+            else
+            {
+                Console.WriteLine("Bad entry, please try again");
+                foundRest = null;
+            }
+
 
         }
 

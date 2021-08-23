@@ -14,5 +14,7 @@ namespace BL
         List<Models.Review> GetReviews(int ID);
         Models.Review AddReview(Models.Review nReview);
         Models.User AddUser(Models.User nUser);
+        double AverageReviews(Models.Resturant rest);
+        // string TranslateStyle(Models.Resturant rest);
     }
 }
