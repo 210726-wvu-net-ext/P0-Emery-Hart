@@ -82,7 +82,7 @@ namespace App
         {
             double avg = _reviewbl.AverageReviews(rest);
             //Needs functionality to translate the SID to its actual string
-            Console.WriteLine($"Resturant#{rest.Id} -- {rest.Name}");
+            Console.WriteLine($"Resturant#: {rest.Id} -- {rest.Name}");
             Console.WriteLine($"Zip Code - {rest.Zip}");
             Console.WriteLine($"Style - {rest.Style}");
             Console.WriteLine($"Average User Rating - {avg}");
@@ -96,6 +96,7 @@ namespace App
             {
                 GetDetails(rest);
             }
+            Log.Debug("Printed all resturant details");
 
         }
 
@@ -105,6 +106,7 @@ namespace App
             string input;
             int goodIn;
             Console.WriteLine("Enter either the Name or ID# you wish to search for: ");
+            // May want to switch this for a switch if its easier, or another kind of t-check?
             input = Console.ReadLine();
 
             if (int.TryParse(input, out goodIn))
@@ -113,6 +115,7 @@ namespace App
                 Console.WriteLine("**Search Results**");
                 Console.WriteLine("----------------------------------------------------------------------");
                 GetDetails(foundRest);
+                Log.Information("We found this one by ID");
             }
             else if (input != null)
             {
@@ -120,6 +123,7 @@ namespace App
                 Console.WriteLine("**Search Results**");
                 Console.WriteLine("----------------------------------------------------------------------");
                 GetDetails(foundRest);
+                Log.Information("We found this one by name");
             }
             else
             {
@@ -127,11 +131,43 @@ namespace App
                 foundRest = null;
             }
 
-
         }
 
         private void ListSearch()
         {
+            List<Resturant> foundList = new List<Resturant>();
+            int goodIn;
+            Console.WriteLine("Please enter a Zip code or Style of resturant to search for:");
+            var input = Console.ReadLine();
+            
+            if (int.TryParse(input, out goodIn))
+            {
+                //Search here
+                foundList = _reviewbl.SearchResturantList(goodIn);
+                Console.WriteLine("**Search Results**");
+                Console.WriteLine("----------------------------------------------------------------------");
+                foreach (Resturant rest in foundList)
+                {
+                    GetDetails(rest);
+                }
+            }
+            else if (input != null)
+            {
+                //Search here
+                foundList = _reviewbl.SearchResturantList(input);
+                Console.WriteLine("**Search Results**");
+                Console.WriteLine("----------------------------------------------------------------------");
+                foreach (Resturant rest in foundList)
+                {
+                    GetDetails(rest);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Bad entry, please try again");
+                foundList = null;
+            }
+
 
         }
 
