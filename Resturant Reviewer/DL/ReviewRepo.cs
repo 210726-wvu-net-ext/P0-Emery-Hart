@@ -119,7 +119,7 @@ namespace DL
         /// Searches reviews by resturaunt ID, may potentially expand to use name
         /// </summary>
         /// <param name="id">Resturaunt ID to find reviews for</param>
-        /// <returns></returns>
+        /// <returns>list of review objects</returns>
         public List<Models.Review> GetReviews(int id)
         {
             List<Models.Review> foundList = new List<Models.Review>();
