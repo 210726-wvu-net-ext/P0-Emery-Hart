@@ -5,9 +5,15 @@ using Microsoft.Extensions.Configuration;
 using BL;
 using DL;
 using DL.Entities;
+using App;
+using Serilog;
 
 
-// Connection for our DB
+
+/// <summary>
+/// Pulls our connection string to establish a DB context
+/// </summary>
+/// <returns></returns>
 var config = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json")
@@ -20,13 +26,16 @@ DbContextOptions<PojectzeroContext> option = new DbContextOptionsBuilder<Pojectz
     .Options;
 
 var context = new PojectzeroContext(option);    
-namespace App
+
+/// <summary>
+/// Attempts to start the menu, will throw a fatal error to log if it fails to start for any reason
+/// </summary>
+try
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
-    }
+    IMenu menu = new MainMenu(new ReviewBL(new ReviewRepo(context)));
+    Log.Debug("Program started");
+}
+catch (Exception e)
+{
+    Log.Fatal(e, "Program must exit :'(");
 }
