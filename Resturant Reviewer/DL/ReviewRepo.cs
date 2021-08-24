@@ -147,7 +147,6 @@ namespace DL
         {
             _context.Reviews.Add(
                 new Entities.Review{
-                    ReviewId = nReview.Id,
                     UserId = nReview.UID,
                     ResturantId = nReview.RID,
                     Rating = nReview.Rating,
