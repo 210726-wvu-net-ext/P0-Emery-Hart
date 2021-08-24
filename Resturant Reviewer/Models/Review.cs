@@ -4,6 +4,14 @@ namespace Models
     {
         public Review(){}
 
+        public Review( int uID, int restID, int rating, string thoughts)
+        {
+            this.UID = uID;
+            this.RID = restID;
+            this.Rating = rating;
+            this.Thoughts = thoughts;
+        }
+
         public Review(int id, int uID, int restID, int rating, string thoughts)
         {
             this.Id = id;

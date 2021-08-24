@@ -15,7 +15,6 @@ namespace DL.Entities
         public int ResturantId { get; set; }
         public string Name { get; set; }
         public int Style { get; set; }
-        public int AvgReview { get; set; }
         public string Description { get; set; }
         public int Zip { get; set; }
 

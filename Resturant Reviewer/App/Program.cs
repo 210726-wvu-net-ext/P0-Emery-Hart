@@ -33,6 +33,7 @@ var context = new PojectzeroContext(option);
 try
 {
     IMenu menu = new MainMenu(new ReviewBL(new ReviewRepo(context)));
+    menu.Start();
     Log.Debug("Program started");
 }
 catch (Exception e)
