@@ -426,6 +426,7 @@ namespace App
             
             User nUser = new User(nUname, nPass, nAccess);
             nUser = _reviewbl.AddUser(nUser);
+            Console.WriteLine("User add was successful");
 
         }
     }
