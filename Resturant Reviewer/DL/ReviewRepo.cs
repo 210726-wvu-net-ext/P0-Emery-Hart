@@ -158,6 +158,11 @@ namespace DL
             return nReview;
         }
 
+        /// <summary>
+        /// Adds a new User 
+        /// </summary>
+        /// <param name="nUser">The user object to parse</param>
+        /// <returns></returns>
         public Models.User AddUser(Models.User nUser)
         {
             _context.Users.Add(
